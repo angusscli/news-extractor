@@ -38,7 +38,8 @@ import com.google.gson.Gson;
 @WebServlet(name = "cnbc", value = "/cnbc")
 public class CnbcServlet extends HttpServlet {
 	private final static Logger log = Logger.getLogger(CnbcServlet.class.getName());
-	private static String[] links = new String[] { "https://www.cnbc.com/id/15839135/device/rss/rss.html",
+	private static String[] links = new String[] { 
+			"https://www.cnbc.com/id/15839135/device/rss/rss.html",
 			"https://www.cnbc.com/id/10000664/device/rss/rss.html",
 			"https://www.cnbc.com/id/15839069/device/rss/rss.html" };
 
@@ -62,27 +63,6 @@ public class CnbcServlet extends HttpServlet {
 				news.setDescription(item.select("description").text());
 				news.setId(item.select("guid").text());
 				news.setDate(item.select("pubDate").text());
-
-				/*
-				  LanguageServiceClient language = LanguageServiceClient.create();
-				  com.google.cloud.language.v1.Document lang =
-				  com.google.cloud.language.v1.Document.newBuilder()
-				  .setContent(news.getTitle() + " " +
-				  news.getDescription()).setType(Type.PLAIN_TEXT).build();
-				  
-				  Sentiment sentiment = language.analyzeSentiment(lang).getDocumentSentiment();
-				  
-				 news.setScore(sentiment.getScore());
-				  news.setMagnitude(sentiment.getMagnitude());
-				 */
-
-				news.setScore(new Float(random(-1.0, 1.0)).floatValue());
-				news.setMagnitude(new Float(random(-1.0, 1.0)).floatValue());
-
-				/*
-				  Document doc2 = Jsoup.connect(item.select("link").text()).get();
-				  news.setDescription(doc2.select("div.group").get(0).text());
-				 */
 
 				Gson gson = new Gson();
 

@@ -17,6 +17,9 @@
 
 	$ gcloud pubsub topics create db-topic
 	$ gcloud pubsub subscriptions create db-subscription --topic db-topic
+	
+	$ gcloud pubsub topics create db2-topic
+	$ gcloud pubsub subscriptions create db2-subscription --topic db2-topic
 
 	
 

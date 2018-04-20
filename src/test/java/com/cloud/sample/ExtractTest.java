@@ -46,8 +46,10 @@ public class ExtractTest {
 
 	    	      Sentiment sentiment = language.analyzeSentiment(lang).getDocumentSentiment();
 	    	      
+	    	      /*
 	    	      news.setScore(sentiment.getScore());
 	    	      news.setMagnitude(sentiment.getMagnitude());
+	    	      */
 	    	      
 	    		/*
 	    			Document doc2 = Jsoup.connect(item.select("link").text()).get();
