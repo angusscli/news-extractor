@@ -39,3 +39,9 @@
 ### Stream Demo
 
     $ curl http://<server ip>:<port>/demo
+
+## Deploy Cron
+
+### Update Cron Job
+	
+	$ gcloud app deploy ./src/main/appengine/cron.yaml

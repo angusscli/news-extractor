@@ -1,4 +1,10 @@
-cron:
- - description: sample cron job
-   url: /
-   schedule: every 1 mins
+cron:   
+ - description: cnbc job
+   url: /cnbc
+   schedule: every day 23:59
+   target: acl
+   
+ - description: stocktwits job
+   url: /twits
+   schedule: every 60 mins
+   target: acl

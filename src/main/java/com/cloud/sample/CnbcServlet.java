@@ -79,7 +79,7 @@ public class CnbcServlet extends HttpServlet {
 				}
 
 				Gson gson = new GsonBuilder().disableHtmlEscaping().create();
-				StorageUtil.write("data/"+news.getDate()+"_news_"+ news.getId()+".txt", gson.toJson(news));
+				StorageUtil.write("data/"+news.getDate()+"/"+news.getDate()+"_news_"+ news.getId()+".txt", gson.toJson(news));
 
 				/*
 				try {

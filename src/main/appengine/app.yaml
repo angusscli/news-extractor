@@ -17,6 +17,7 @@
 # [START runtime]
 runtime: java
 env: flex
+service: acl
 
 runtime_config:  
   jdk: openjdk8

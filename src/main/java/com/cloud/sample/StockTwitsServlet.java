@@ -113,7 +113,7 @@ public class StockTwitsServlet extends HttpServlet {
 					news.setType("StockTwits");
 
 					Gson gson = new GsonBuilder().disableHtmlEscaping().create();
-					StorageUtil.write("data/"+news.getDate()+"_twits_"+ news.getId()+".txt", gson.toJson(news));
+					StorageUtil.write("data/"+news.getDate()+"/"+news.getDate()+"_twits_"+ news.getId()+".txt", gson.toJson(news));
 				}
 			}
 		}
