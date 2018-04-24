@@ -36,6 +36,7 @@ import org.jsoup.select.Elements;
 import com.cloud.sample.bean.News;
 import com.cloud.sample.util.StorageUtil;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 
 @SuppressWarnings("serial")
@@ -70,7 +71,6 @@ public class CnbcServlet extends HttpServlet {
 		        try {
 					date = parser.parse(item.select("pubDate").text());
 
-					
 					SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
 					String formattedDate = formatter.format(date);
 					news.setDate(formattedDate);
@@ -78,7 +78,7 @@ public class CnbcServlet extends HttpServlet {
 						e.printStackTrace();
 				}
 
-				Gson gson = new Gson();
+				Gson gson = new GsonBuilder().disableHtmlEscaping().create();
 				StorageUtil.write("data/"+news.getDate()+"_news_"+ news.getId()+".txt", gson.toJson(news));
 
 				/*

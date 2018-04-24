@@ -36,6 +36,7 @@ import org.jsoup.Jsoup;
 import com.cloud.sample.bean.News;
 import com.cloud.sample.util.StorageUtil;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 @SuppressWarnings("serial")
 @WebServlet(name = "twits", value = "/twits")
@@ -111,48 +112,11 @@ public class StockTwitsServlet extends HttpServlet {
 					news.setDate(formattedDate);
 					news.setType("StockTwits");
 
-					Gson gson = new Gson();
+					Gson gson = new GsonBuilder().disableHtmlEscaping().create();
 					StorageUtil.write("data/"+news.getDate()+"_twits_"+ news.getId()+".txt", gson.toJson(news));
 				}
 			}
 		}
-
-		/*
-		for (String link : links) {
-			Document doc = Jsoup.connect(link).get();
-			Elements items = doc.select("item");
-
-			for (Element item : items) {
-				News news = new News();
-				news.setTitle(item.select("title").text());
-				news.setDescription(item.select("description").text());
-				news.setId(item.select("guid").text());
-		        SimpleDateFormat parser = new SimpleDateFormat("EEE, d MMM yyyy HH:mm zzz");
-		        Date date;
-
-		        try {
-					date = parser.parse(item.select("pubDate").text());
-
-					
-					SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
-					String formattedDate = formatter.format(date);
-					news.setDate(formattedDate);
-				} catch (ParseException e) {
-						e.printStackTrace();
-				}
-
-				Gson gson = new Gson();
-				StorageUtil.write("data/news/"+news.getDate()+"_"+ news.getId()+".txt", gson.toJson(news));
-
-				
-				try {
-					NewsPublisher.publish(gson.toJson(news));
-				} catch (Exception e) {
-					log.severe(e.getMessage());
-				}
-				
-			}
-		}*/
 
 		out.println("Done");
 	}

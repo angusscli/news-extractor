@@ -12,15 +12,12 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.junit.Test;
 
-import com.cloud.sample.bean.News;
 import com.google.api.core.ApiFuture;
 import com.google.api.core.ApiFutureCallback;
 import com.google.api.core.ApiFutures;
 import com.google.api.gax.rpc.ApiException;
-import com.google.cloud.language.v1.Document.Type;
-import com.google.cloud.language.v1.LanguageServiceClient;
-import com.google.cloud.language.v1.Sentiment;
 import com.google.cloud.pubsub.v1.Publisher;
+import com.google.gson.Gson;
 import com.google.protobuf.ByteString;
 import com.google.pubsub.v1.ProjectTopicName;
 import com.google.pubsub.v1.PubsubMessage;
@@ -37,7 +34,7 @@ public class ExtractTest {
 		StorageUtil.write("test.csv", "123");
 	}*/
 	
-	@Test
+	//@Test
 	public void testDate() throws ParseException {
 		/*
 	       String input = "Thu Jun 18 20:56:02 EDT 2009";
@@ -61,13 +58,16 @@ public class ExtractTest {
 		log.info(doc);
 	}
 	
-	//@Test
-	void extractTest() throws Exception {
+	@Test
+	public void extractTest() throws Exception {
 	    Document doc = Jsoup.connect("https://www.cnbc.com/id/15839135/device/rss/rss.html").get();
 	    
 	    Elements items = doc.select("item");
 	    
 	    for (Element item : items) {
+	    		log.info(item.select("title").text());
+	    		
+	    	/*
 	    		News news = new News();
 	    		news.setTitle(item.select("title").text());
 	    		news.setDescription(item.select("description").text());
@@ -79,6 +79,7 @@ public class ExtractTest {
 	    	          .setContent(news.getTitle() + " " + news.getDescription()).setType(Type.PLAIN_TEXT).build();
 
 	    	      Sentiment sentiment = language.analyzeSentiment(lang).getDocumentSentiment();
+	    	      */
 	    	      
 	    	      /*
 	    	      news.setScore(sentiment.getScore());

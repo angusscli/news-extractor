@@ -35,6 +35,7 @@ import org.jsoup.select.Elements;
 
 import com.cloud.sample.bean.News;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 
 @SuppressWarnings("serial")
@@ -72,7 +73,7 @@ public class DemoServlet extends HttpServlet {
 						e.printStackTrace();
 				}
 
-				Gson gson = new Gson();
+		        Gson gson = new GsonBuilder().disableHtmlEscaping().create();
 
 				try {
 					NewsPublisher.publish(gson.toJson(news));
