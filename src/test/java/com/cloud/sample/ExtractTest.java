@@ -1,11 +1,16 @@
 package com.cloud.sample;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
 import java.util.logging.Logger;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.junit.Test;
 
 import com.cloud.sample.bean.News;
 import com.google.api.core.ApiFuture;
@@ -22,10 +27,39 @@ import com.google.pubsub.v1.PubsubMessage;
 
 
 public class ExtractTest {
-
 	private final static Logger log = Logger.getLogger(ExtractTest.class.getName());
 	private final static String PROJECT_ID = "traded-risk-project-1";
 	private final static String TOPIC_ID = "news-topic";
+	
+	/*
+	@Test
+	public void writeTest() throws IOException {
+		StorageUtil.write("test.csv", "123");
+	}*/
+	
+	@Test
+	public void testDate() throws ParseException {
+		/*
+	       String input = "Thu Jun 18 20:56:02 EDT 2009";
+	        SimpleDateFormat parser = new SimpleDateFormat("EEE MMM d HH:mm:ss zzz yyyy");
+	        */
+		String input = "2018-04-24T07:27:52Z";
+        SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        parser.setTimeZone(TimeZone.getTimeZone("GMT"));
+        
+	        Date date = parser.parse(input);
+	        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+	        String formattedDate = formatter.format(date);
+	        log.info(formattedDate);
+	}
+	
+	//@Test
+	public void extractTest2() throws Exception {
+		String url = "https://api.stocktwits.com/api/2/streams/symbol/SPY.json";
+		
+		String doc = Jsoup.connect(url).ignoreContentType(true).execute().body();
+		log.info(doc);
+	}
 	
 	//@Test
 	void extractTest() throws Exception {

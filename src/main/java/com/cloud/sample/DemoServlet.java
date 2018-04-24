@@ -34,20 +34,15 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.cloud.sample.bean.News;
-import com.cloud.sample.util.StorageUtil;
 import com.google.gson.Gson;
 
 
 @SuppressWarnings("serial")
-@WebServlet(name = "cnbc", value = "/cnbc")
-public class CnbcServlet extends HttpServlet {
-	private final static Logger log = Logger.getLogger(CnbcServlet.class.getName());
+@WebServlet(name = "demo", value = "/demo")
+public class DemoServlet extends HttpServlet {
+	private final static Logger log = Logger.getLogger(DemoServlet.class.getName());
 	private static String[] links = new String[] {
-			"https://www.cnbc.com/id/15839135/device/rss/rss.html",
-			"https://www.cnbc.com/id/10000664/device/rss/rss.html",
-			"https://www.cnbc.com/id/15839069/device/rss/rss.html",
-			"https://www.cnbc.com/id/100003114/device/rss/rss.html",
-			"https://www.cnbc.com/id/15837362/device/rss/rss.html"
+			"https://www.cnbc.com/id/15839135/device/rss/rss.html"
 	};
 
 	@Override
@@ -70,7 +65,6 @@ public class CnbcServlet extends HttpServlet {
 		        try {
 					date = parser.parse(item.select("pubDate").text());
 
-					
 					SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
 					String formattedDate = formatter.format(date);
 					news.setDate(formattedDate);
@@ -79,15 +73,12 @@ public class CnbcServlet extends HttpServlet {
 				}
 
 				Gson gson = new Gson();
-				StorageUtil.write("data/"+news.getDate()+"_news_"+ news.getId()+".txt", gson.toJson(news));
 
-				/*
 				try {
 					NewsPublisher.publish(gson.toJson(news));
 				} catch (Exception e) {
 					log.severe(e.getMessage());
 				}
-				*/
 			}
 		}
 
