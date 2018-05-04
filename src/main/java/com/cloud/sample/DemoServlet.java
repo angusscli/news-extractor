@@ -43,9 +43,7 @@ import com.google.gson.GsonBuilder;
 public class DemoServlet extends HttpServlet {
 	private final static Logger log = Logger.getLogger(DemoServlet.class.getName());
 	private static String[] links = new String[] {
-			"https://www.cnbc.com/id/15839135/device/rss/rss.html",
-			"https://www.cnbc.com/id/100003114/device/rss/rss.html",
-			"https://www.cnbc.com/id/15839069/device/rss/rss.html"
+			"https://www.cnbc.com/id/100003114/device/rss/rss.html"
 	};
 
 	@Override
