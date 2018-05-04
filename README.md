@@ -18,6 +18,7 @@
 
 	$ gcloud pubsub topics create news-topic
 	$ gcloud pubsub subscriptions create news-subscription --topic news-topic
+	$ gcloud pubsub subscriptions create news-subscription2 --topic news-topic
 
 	$ gcloud pubsub topics create db-topic
 	$ gcloud pubsub subscriptions create db-subscription --topic db-topic
