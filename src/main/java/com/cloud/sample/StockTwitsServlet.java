@@ -59,7 +59,7 @@ public class StockTwitsServlet extends HttpServlet {
 		String url = "https://api.stocktwits.com/api/2/streams/symbol/SPY.json";
 		
 		if (lastId != null) {
-			url = url + "?since=" + lastId;
+			//url = url + "?since=" + lastId;
 		}
 		String tweets = Jsoup.connect(url).ignoreContentType(true).execute().body();
 
@@ -112,8 +112,10 @@ public class StockTwitsServlet extends HttpServlet {
 					news.setDate(formattedDate);
 					news.setType("StockTwits");
 
+					
 					Gson gson = new GsonBuilder().disableHtmlEscaping().create();
 					StorageUtil.write("data/"+news.getDate()+"/"+news.getDate()+"_twits_"+ news.getId()+".txt", gson.toJson(news));
+					
 				}
 			}
 		}

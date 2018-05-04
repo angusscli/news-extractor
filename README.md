@@ -25,6 +25,8 @@
 	$ gcloud pubsub topics create db2-topic
 	$ gcloud pubsub subscriptions create db2-subscription --topic db2-topic
 
+	$ gcloud pubsub topics create db3-topic
+	$ gcloud pubsub subscriptions create db3-subscription --topic db3-topic
 
 ## API
 
