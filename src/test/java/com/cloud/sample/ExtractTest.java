@@ -1,11 +1,14 @@
 package com.cloud.sample;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
 import java.util.logging.Logger;
 
+import org.joda.time.DateTime;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -17,7 +20,6 @@ import com.google.api.core.ApiFutureCallback;
 import com.google.api.core.ApiFutures;
 import com.google.api.gax.rpc.ApiException;
 import com.google.cloud.pubsub.v1.Publisher;
-import com.google.gson.Gson;
 import com.google.protobuf.ByteString;
 import com.google.pubsub.v1.ProjectTopicName;
 import com.google.pubsub.v1.PubsubMessage;
@@ -33,7 +35,25 @@ public class ExtractTest {
 	public void writeTest() throws IOException {
 		StorageUtil.write("test.csv", "123");
 	}*/
+	@Test
+	public void testTime() throws ParseException {
+
+
+    // Returns the current date with the same format as Javascript's new Date().toJSON(), ISO 8601
+    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US);
+    dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+    log.info( java.time.Instant.now().getEpochSecond()+"");
+
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+	String dateInString = "20180101";
+	Date date = sdf.parse(dateInString);
 	
+    DateTime dateTime = new DateTime(date);
+    long unix = dateTime.getMillis()/1000; 
+    log.info(unix+"");
+   
+
+	}
 	//@Test
 	public void testDate() throws ParseException {
 		/*
@@ -58,7 +78,7 @@ public class ExtractTest {
 		log.info(doc);
 	}
 	
-	@Test
+	//@Test
 	public void extractTest() throws Exception {
 	    Document doc = Jsoup.connect("https://www.cnbc.com/id/15839135/device/rss/rss.html").get();
 	    

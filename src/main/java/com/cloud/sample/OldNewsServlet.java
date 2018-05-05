@@ -18,6 +18,8 @@ package com.cloud.sample;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -25,6 +27,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.joda.time.DateTime;
 
 import com.cloud.sample.util.StorageUtil;
 
@@ -41,6 +45,7 @@ public class OldNewsServlet extends HttpServlet {
 		PrintWriter out = resp.getWriter();
 		
 		StringBuffer sb = new StringBuffer();
+		StringBuffer sb2 = new StringBuffer();
 		
 		List<String> files = StorageUtil.list("output", ".txt");
 		
@@ -48,49 +53,38 @@ public class OldNewsServlet extends HttpServlet {
 			String[] content = StorageUtil.read(file).split("\n");
 			for (String line : content) {
 				String[] tmp = line.split("\\|");
+				
+				long unix = 0l;
+
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+				String dateInString = tmp[0];
+				try {
+				Date date = sdf.parse(dateInString);
+				
+			    DateTime dateTime = new DateTime(date);
+			    unix = dateTime.getMillis(); 
+				} catch (Exception e) {
+					log.severe(e.getMessage());
+				}
+			   
 				if (tmp.length==5) {
 					if (Double.parseDouble(tmp[3])>0) {
-						out.print("{'x':'"+tmp[0]+"','y':'"+tmp[3]+"','size':'"+tmp[4]+"'},");
+						sb.append("{'x':'").append(unix).append("','y':'")
+						.append(tmp[3]).append("','size':'").append(tmp[4]).append("'},")
+						;
 					} else if (Double.parseDouble(tmp[3])<0) {
-						sb.append("{'x':'").append(tmp[0]).append("','y':'")
+						sb2.append("{'x':'").append(unix).append("','y':'")
 						.append(tmp[3]).append("','size':'").append(tmp[4]).append("'},")
 						;
 					}
 				}
 			}
 		}
-		out.println();
-		out.println(sb.toString());
-		/*
-		for (String link : links) {
-			Document doc = Jsoup.connect(link).get();
-			Elements items = doc.select("item");
-
-			for (Element item : items) {
-				News news = new News();
-				news.setTitle(item.select("title").text());
-				news.setDescription(item.select("description").text());
-				news.setId(item.select("guid").text());
-				news.setType("cnbc");
-		        SimpleDateFormat parser = new SimpleDateFormat("EEE, d MMM yyyy HH:mm zzz");
-		        Date date;
-
-		        try {
-					date = parser.parse(item.select("pubDate").text());
-
-					SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
-					String formattedDate = formatter.format(date);
-					news.setDate(formattedDate);
-				} catch (ParseException e) {
-						e.printStackTrace();
-				}
-
-				Gson gson = new GsonBuilder().disableHtmlEscaping().create();
-				StorageUtil.write("data/"+news.getDate()+"/"+news.getDate()+"_news_"+ news.getId()+".txt", gson.toJson(news));
-
-		}
-			}
-			*/
-		out.println("Done");
+		out.println("var chartdata3 = [{key: 'Positive', values: [");
+		out.println(sb.substring(0,sb.length()-1).toString());
+		out.println("]},{key: 'Negative', values: [");
+		out.println(sb2.substring(0,sb2.length()-1).toString());
+		out.println("]}];");
+		
 	}
 }
