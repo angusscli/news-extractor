@@ -29,8 +29,8 @@
 	$ gcloud pubsub topics create db3-topic
 	$ gcloud pubsub subscriptions create db3-subscription --topic db3-topic
 	
-	$ gcloud pubsub topics create txn-topic
-	$ gcloud pubsub subscriptions create txn-subscription --topic txn-topic
+	$ gcloud pubsub topics create user-topic
+	$ gcloud pubsub subscriptions create user-subscription --topic user-topic
 
 ## API
 
