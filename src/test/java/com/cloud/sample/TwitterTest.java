@@ -23,10 +23,10 @@ public class TwitterTest {
 		
 		 ConfigurationBuilder cb = new ConfigurationBuilder();
 	        cb.setDebugEnabled(true)
-	          .setOAuthConsumerKey("bZ4FKQU52LAbQ97NNlhJ0RRQ1")
-	          .setOAuthConsumerSecret("NFRl1wohyUUrROV5vclLj6xLCyUU7MB2NR7R9HO04tJJEUBRv1")
-	          .setOAuthAccessToken("136450852-G4MoN3b8OvULvAwRyYGKCC6aquAFI1GD1uyTvu2i")
-	          .setOAuthAccessTokenSecret("Fj6FJTN3uoW1e9glJ1mdbMwon51fQVaXazgd6EB3nUWxy");
+	          .setOAuthConsumerKey("")
+	          .setOAuthConsumerSecret("")
+	          .setOAuthAccessToken("")
+	          .setOAuthAccessTokenSecret("");
 	        
 	        TwitterStreamFactory tf = new TwitterStreamFactory(cb.build());
 	        ;
