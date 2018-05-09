@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.logging.Logger;
 
@@ -56,94 +57,118 @@ public class TwitterServlet extends HttpServlet {
 
 	FilterQuery filtered = new FilterQuery();
 
-	String keywords[] = {
-			"#AlphaStock","#FC4","#FC5"
-	};
+	String keywords[] = { "#AlphaStock","#FC4","#FC5"};
+	
+	ConfigurationBuilder cb = null;
+	TwitterStreamFactory tf = null;
+	TwitterStream twitterStream = null;
 	
 	@Override
-	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-	
+	public void init() {
 		
-		
-		 ConfigurationBuilder cb = new ConfigurationBuilder();
-	        cb.setDebugEnabled(true)
+		  cb = new ConfigurationBuilder();
+	      
+		  cb.setDebugEnabled(true)
 	          .setOAuthConsumerKey("")
 	          .setOAuthConsumerSecret("")
 	          .setOAuthAccessToken("")
 	          .setOAuthAccessTokenSecret("");
 	        
-	        TwitterStreamFactory tf = new TwitterStreamFactory(cb.build());
-	        ;
-	        
-		filtered.track(keywords);
-		filtered.language("en");
+	       tf = new TwitterStreamFactory(cb.build());
+	       
+//	   	   filtered.track(keywords);
+//		   filtered.language("en");
 		
-
-		//TwitterStream twitterStream = new TwitterStreamFactory().getInstance();
-		TwitterStream twitterStream = tf.getInstance();
+	       System.out.println("Servlet Started");
+	        	
+	}
+	
+	
+	
+	@Override
+	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+	
+		try {
+			
+				String action = (req.getParameter("action")!=null?req.getParameter("action"):"");
+				String updateKeywords[] = (req.getParameterValues("keywords")!=null?req.getParameterValues("keywords"):null);
 		
-		twitterStream.addListener(listener);
-
-		if (keywords.length==0) {
-			twitterStream.sample();
-		} else { 
-		    twitterStream.filter(filtered);
+				switch (action)
+		        {
+					case "stop" :
+						log.info("Servlet action: "+ action);
+						shutdown();
+						break;
+					case "update" :
+						log.info("Servlet action: "+ action);
+										
+								if (updateKeywords!=null && updateKeywords.length>0 )
+								{
+									shutdown();
+									keywords = updateKeywords;
+									log.info("Update:" + Arrays.toString(keywords));
+									startup();
+								}	
+						break;
+					case "show" :
+						log.info("Current Keywords:" + Arrays.toString(keywords));
+						break;
+					default:
+						log.info("Servlet action: "+ action);
+						startup();
+						break;
+		        }
+		
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    				
+				
+	}
+	
+	private void shutdown() throws Exception {
+		twitterStream.cleanUp();
+		twitterStream.shutdown();
+		twitterStream = null;
+		
+	}
+	
+	private void startup() throws Exception {
+		
+		if (twitterStream == null)
+		{			
+			filtered.track(keywords);
+			filtered.language("en");
+			
+			twitterStream = tf.getInstance();
+			
+			twitterStream.addListener(listener);
+			
+			if (keywords.length==0) {
+				twitterStream.sample();
+			} else { 
+			    twitterStream.filter(filtered);
+			}
+			
+			System.out.println("Twitter Stream Connected with Filters:" + Arrays.toString(keywords));
 		}
 		
-		System.out.println("connected");
-	
-		
-////		PrintWriter out = resp.getWriter();
-////
-////		for (String link : links) {
-////			Document doc = Jsoup.connect(link).get();
-////			Elements items = doc.select("item");
-////
-////			for (Element item : items) {
-////				News news = new News();
-////				news.setTitle(item.select("title").text());
-////				news.setDescription(item.select("description").text());
-////				news.setId(item.select("guid").text());
-////				news.setType("cnbc");
-////		        SimpleDateFormat parser = new SimpleDateFormat("EEE, d MMM yyyy HH:mm zzz");
-////		        Date date;
-////
-////		        try {
-////					date = parser.parse(item.select("pubDate").text());
-////
-////					SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
-////					String formattedDate = formatter.format(date);
-////					news.setDate(formattedDate);
-////				} catch (ParseException e) {
-////						e.printStackTrace();
-////				}
-////
-////		        Gson gson = new GsonBuilder().disableHtmlEscaping().create();
-////
-////				try {
-////					NewsPublisher.publish(gson.toJson(news));
-////				} catch (Exception e) {
-////					log.severe(e.getMessage());
-////				}
-////			}
-////		}
-//
-//		out.println("Done");
 	}
 	
 	StatusListener listener = new StatusListener(){
 		
 		News news = new News();
         public void onStatus(Status status) {
-            System.out.println(status.getUser().getName() + " : " + status.getText());
+            //System.out.println(status.getUser().getName() + " : " + status.getText());
             
             
             
-            news.setTitle(status.getUser().getName()+":"+ status.getText());
-			news.setDescription(status.getUser().getName()+":"+ status.getText());
+            news.setTitle(status.getUser().getName()+": "+ status.getText());
+			news.setDescription(status.getUser().getName()+": "+ status.getText());
 		
-			System.out.println("Status" + status.getUser().getName()+ ":" + status.getText());
-			System.out.println("Description" + status.getUser().getName()+":"+ status.getText());
+			log.info("Status" + status.getUser().getName()+ ":" + status.getText());
+			log.info("Description" + status.getUser().getName()+":"+ status.getText());
 			
 			news.setId(Long.toString(status.getId()));
 			news.setType("twitter");

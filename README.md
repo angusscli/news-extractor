@@ -49,8 +49,20 @@
 
 ### Twistter Stream Demo
 
+	Start:
     $ curl http://<server ip>:<port>/twisterStream
     
+    Stop:
+    curl "http://localhost:8080/twitterStream?action=stop"
+    
+    Update Keywords:
+    	curl "http://localhost:8080/twitterStream?action=update&keywords=FC4&keyword=FC5"
+    or
+    	curl "http://localhost:8080/twitterStream?action=update&keywords=FC4%20FC5&keyword=%23trading"
+    
+    Show current Keywords:
+    curl "http://localhost:8080/twitterStream?action=show"
+
 ## Deploy Cron
 
 ### Update Cron Job
