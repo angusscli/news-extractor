@@ -46,6 +46,11 @@
 
     $ curl http://<server ip>:<port>/demo
 
+
+### Twistter Stream Demo
+
+    $ curl http://<server ip>:<port>/twisterStream
+    
 ## Deploy Cron
 
 ### Update Cron Job
