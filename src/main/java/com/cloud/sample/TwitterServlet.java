@@ -57,7 +57,7 @@ public class TwitterServlet extends HttpServlet {
 	FilterQuery filtered = new FilterQuery();
 
 	String keywords[] = {
-    "#Hackathon #AlphaStock #FC4 #FC5"
+    "#AlphaStock","#FC4","#FC5"
 	};
 	
 	@Override
