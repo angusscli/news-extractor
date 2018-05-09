@@ -34,7 +34,7 @@ public class TwitterTest {
 	        FilterQuery filtered = new FilterQuery();
 
 			String keywords[] = {
-		    "#trading","#BREAKING","#AlphaStock #FC4 #FC5 #SPY"
+		    "#AlphaStock #FC4 #FC5","#SPY"
 		  };
 		filtered.track(keywords);
 		filtered.language("en");
