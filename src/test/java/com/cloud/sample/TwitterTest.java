@@ -34,14 +34,14 @@ public class TwitterTest {
 	        FilterQuery filtered = new FilterQuery();
 
 			String keywords[] = {
-		    "#AlphaStock #FC4 #FC5","#SPY"
+			"#AlphaStock","#FC4","#FC5"
 		  };
 		filtered.track(keywords);
 		filtered.language("en");
 				 
 		StatusListener listener = new StatusListener(){
 		        public void onStatus(Status status) {
-		            System.out.println(status.getUser().getName() + " : " + status.getText());
+		            System.out.println(status.getUser().getName() + " : " + status.getUser().getDescription());
 		    }
 		    public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) {}
 		    public void onTrackLimitationNotice(int numberOfLimitedStatuses) {}
