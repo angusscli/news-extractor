@@ -12,7 +12,7 @@ import com.google.pubsub.v1.ProjectTopicName;
 import com.google.pubsub.v1.PubsubMessage;
 
 public class NewsPublisher {
-	private final static String PROJECT_ID = "traded-risk-project-1";
+	private final static String PROJECT_ID = "techfest-hackathon-1";
 	private final static String TOPIC_ID = "news-topic";
 
 	private final static Logger log = Logger.getLogger(NewsPublisher.class.getName());

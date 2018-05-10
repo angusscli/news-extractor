@@ -11,7 +11,7 @@ import twitter4j.conf.ConfigurationBuilder;
 
 public class TwitterTest {
 	private final static Logger log = Logger.getLogger(TwitterTest.class.getName());
-	private final static String PROJECT_ID = "traded-risk-project-1";
+	private final static String PROJECT_ID = "techfest-hackathon-1";
 	private final static String TOPIC_ID = "news-topic";
 	
 	//@Test
@@ -22,11 +22,11 @@ public class TwitterTest {
 		//FilterQuery filtered = new FilterQuery()
 		
 		 ConfigurationBuilder cb = new ConfigurationBuilder();
-	        cb.setDebugEnabled(true)
-	          .setOAuthConsumerKey("")
-	          .setOAuthConsumerSecret("")
-	          .setOAuthAccessToken("")
-	          .setOAuthAccessTokenSecret("");
+		 cb.setDebugEnabled(true)
+         .setOAuthConsumerKey("")
+         .setOAuthConsumerSecret("")
+         .setOAuthAccessToken("")
+         .setOAuthAccessTokenSecret("");
 	        
 	        TwitterStreamFactory tf = new TwitterStreamFactory(cb.build());
 	        ;
@@ -41,7 +41,7 @@ public class TwitterTest {
 				 
 		StatusListener listener = new StatusListener(){
 		        public void onStatus(Status status) {
-		            System.out.println(status.getUser().getName() + " : " + status.getUser().getDescription());
+		            System.out.println(status.getUser().getName() + " : " + status.getText());
 		    }
 		    public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) {}
 		    public void onTrackLimitationNotice(int numberOfLimitedStatuses) {}

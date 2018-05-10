@@ -24,6 +24,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.logging.Logger;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -57,6 +58,7 @@ public class TwitterServlet extends HttpServlet {
 
 	FilterQuery filtered = new FilterQuery();
 
+//	String keywords[] = { "#AlphaStock","#FC4","#FC5","#trading"};
 	String keywords[] = { "#AlphaStock","#FC4","#FC5"};
 	
 	ConfigurationBuilder cb = null;
@@ -68,18 +70,17 @@ public class TwitterServlet extends HttpServlet {
 		
 		  cb = new ConfigurationBuilder();
 	      
-		  cb.setDebugEnabled(true)
-	          .setOAuthConsumerKey("")
-	          .setOAuthConsumerSecret("")
-	          .setOAuthAccessToken("")
-	          .setOAuthAccessTokenSecret("");
+		    cb.setDebugEnabled(true)
+	          .setOAuthConsumerKey("bZ4FKQU52LAbQ97NNlhJ0RRQ1")
+	          .setOAuthConsumerSecret("NFRl1wohyUUrROV5vclLj6xLCyUU7MB2NR7R9HO04tJJEUBRv1")
+	          .setOAuthAccessToken("136450852-G4MoN3b8OvULvAwRyYGKCC6aquAFI1GD1uyTvu2i")
+	          .setOAuthAccessTokenSecret("Fj6FJTN3uoW1e9glJ1mdbMwon51fQVaXazgd6EB3nUWxy");
 	        
 	       tf = new TwitterStreamFactory(cb.build());
 	       
-//	   	   filtered.track(keywords);
-//		   filtered.language("en");
-		
-	       System.out.println("Servlet Started");
+	       System.out.println("MICHAEL-- HIHIHIHIH");
+	       log.info("MICHAEL2-- ");
+	       log.info("Servlet Started");
 	        	
 	}
 	
@@ -92,7 +93,7 @@ public class TwitterServlet extends HttpServlet {
 			
 				String action = (req.getParameter("action")!=null?req.getParameter("action"):"");
 				String updateKeywords[] = (req.getParameterValues("keywords")!=null?req.getParameterValues("keywords"):null);
-		
+
 				switch (action)
 		        {
 					case "stop" :
@@ -119,12 +120,21 @@ public class TwitterServlet extends HttpServlet {
 						break;
 		        }
 		
+				ServletOutputStream sos = resp.getOutputStream();
+				sos.println("<html><h3>");
+			    sos.println("Twister Stream  " + action + "<br>" );
+			    if (action.equals("show"))
+			    sos.println("Current Keywords " + Arrays.toString(keywords) + "<br>" );	
+			    		
+				sos.println("</h3></html>");
+				sos.close();
+				
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	    				
-				
+		
 	}
 	
 	private void shutdown() throws Exception {
@@ -151,6 +161,7 @@ public class TwitterServlet extends HttpServlet {
 			    twitterStream.filter(filtered);
 			}
 			
+			log.info("Twitter Stream Connected with Filters:" + Arrays.toString(keywords));
 			System.out.println("Twitter Stream Connected with Filters:" + Arrays.toString(keywords));
 		}
 		
@@ -169,6 +180,9 @@ public class TwitterServlet extends HttpServlet {
 		
 			log.info("Status" + status.getUser().getName()+ ":" + status.getText());
 			log.info("Description" + status.getUser().getName()+":"+ status.getText());
+			
+			System.out.println("Status" + status.getUser().getName()+ ":" + status.getText());
+			System.out.println("Description" + status.getUser().getName()+":"+ status.getText());
 			
 			news.setId(Long.toString(status.getId()));
 			news.setType("twitter");
@@ -189,6 +203,7 @@ public class TwitterServlet extends HttpServlet {
 				//System.out.println(gson.toJson(news).toString());
 			} catch (Exception e) {
 				log.severe(e.getMessage());
+				e.printStackTrace();
 			}
     }
     public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) {}
@@ -201,12 +216,12 @@ public class TwitterServlet extends HttpServlet {
 	@Override
 	public void onScrubGeo(long arg0, long arg1) {
 		// TODO Auto-generated method stub
-		  System.out.println("Got scrub_geo event userId:" + arg0 + " upToStatusId:" + arg1);
+		log.warning("Got scrub_geo event userId:" + arg0 + " upToStatusId:" + arg1);
 	}
 	@Override
 	public void onStallWarning(StallWarning arg0) {
 		// TODO Auto-generated method stub
-		  System.out.println("Got stall warning:" + arg0);
+		  log.warning("Got stall warning:" + arg0);
 		
 	}
 };

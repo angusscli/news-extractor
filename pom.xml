@@ -65,21 +65,43 @@
     <artifactId>commons-lang3</artifactId>
     <version>3.7</version>
 </dependency>
-    <dependency>
-      <groupId>com.google.cloud</groupId>
-      <artifactId>google-cloud-pubsub</artifactId>
-      <version>0.43.0-beta</version>
-    </dependency>
-    <dependency>
-      <groupId>com.google.cloud</groupId>
-      <artifactId>google-cloud-language</artifactId>
-      <version>1.25.0</version>
-    </dependency>
-    	<dependency>
-			<groupId>com.google.cloud</groupId>
-			<artifactId>google-cloud-storage</artifactId>
-			<version>1.3.1</version>
-</dependency>
+	  
+	  <dependency>
+	     <groupId>com.google.cloud</groupId>
+	     <artifactId>google-cloud-pubsub</artifactId>
+	     <version>0.46.0-beta</version>
+
+	   </dependency>
+
+<!-- 	   <dependency> -->
+<!-- 	     <groupId>com.google.api.grpc</groupId> -->
+<!-- 		<artifactId>proto-google-cloud-pubsub-v1</artifactId> -->
+<!-- 		<version>0.12.0</version> -->
+<!-- 		  </dependency> -->
+<!-- 		 <dependency> -->
+<!-- 	     <groupId>com.google.api.grpc</groupId> -->
+<!-- 		<artifactId>proto-google-cloud-pubsub-v1</artifactId> -->
+<!-- 		<version>0.12.0</version> -->
+	
+<!-- 	   </dependency> -->
+	   
+<!-- 	<dependency> -->
+<!--       <groupId>com.google.apis</groupId> -->
+<!--       <artifactId>google-api-services-pubsub</artifactId> -->
+<!--       <version>v1-rev385-1.23.0</version> -->
+<!--     </dependency> -->
+    
+	   <dependency>
+	     <groupId>com.google.cloud</groupId>
+	     <artifactId>google-cloud-language</artifactId>
+	     <version>1.25.0</version>
+	   </dependency>
+	  	<dependency>
+		<groupId>com.google.cloud</groupId>
+		<artifactId>google-cloud-storage</artifactId>
+		<version>1.3.1</version>
+	</dependency>
+
 <!-- Twitter Dependencies -->
       <dependency>
            <groupId>org.twitter4j</groupId>
@@ -91,7 +113,34 @@
             <artifactId>twitter4j-stream</artifactId>
             <version>4.0.6</version>
         </dependency>
+<dependency>
+  <groupId>com.google.api-client</groupId>
+  <artifactId>google-api-client</artifactId>
+  <version>1.21.0</version>
+</dependency>
+<dependency>
+  <groupId>com.google.api-client</groupId>
+  <artifactId>google-api-client-appengine</artifactId>
+  <version>1.21.0</version>
+</dependency>
+<dependency>
+  <groupId>com.google.api-client</groupId>
+  <artifactId>google-api-client-servlet</artifactId>
+  <version>1.21.0</version>
+</dependency>
+        
+<!-- 		<dependency> -->
+<!-- 		    <groupId>io.grpc</groupId> -->
+<!-- 		    <artifactId>grpc-netty</artifactId> -->
+<!-- 		    <version>1.2.0</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 		    <groupId>io.grpc</groupId> -->
+<!-- 		    <artifactId>grpc-core</artifactId> -->
+<!-- 		    <version>1.2.0</version> -->
+<!-- 		</dependency> -->
 
+<!-- Thanks for using https://jar-download.com -->
   </dependencies>
 <!--  End Twitter Dependencies  -->
   <build>

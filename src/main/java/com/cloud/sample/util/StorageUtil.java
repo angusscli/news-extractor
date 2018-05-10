@@ -18,7 +18,8 @@ import com.google.cloud.storage.Storage.BucketListOption;
 import com.google.cloud.storage.StorageOptions;
 
 public class StorageUtil {
-	public final static String BUCKET_NAME = "staging-testing-43541281";
+	//public final static String BUCKET_NAME = "staging-testing-43541281";
+	public final static String BUCKET_NAME = "hackathon-staging-alphastock";
 
 	private final static Logger log = Logger.getLogger(StorageUtil.class.getName());
 	
