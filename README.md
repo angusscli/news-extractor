@@ -31,6 +31,9 @@
 	
 	$ gcloud pubsub topics create user-topic
 	$ gcloud pubsub subscriptions create user-subscription --topic user-topic
+	
+	$ gcloud pubsub topics create txn-topic
+	$ gcloud pubsub subscriptions create txn-subscription --topic txn-topic
 
 ## API
 
