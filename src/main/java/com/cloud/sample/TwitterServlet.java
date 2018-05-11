@@ -61,12 +61,12 @@ public class TwitterServlet extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 
-		cb = new ConfigurationBuilder();
-
-		cb.setDebugEnabled(true);
-
-		tf = new TwitterStreamFactory(cb.build());
-
+//		cb = new ConfigurationBuilder();
+//
+//		cb.setDebugEnabled(true);
+//
+//		tf = new TwitterStreamFactory(cb.build());
+		tf = new TwitterStreamFactory();
 		try {
 			startup();
 		} catch (Exception e) {

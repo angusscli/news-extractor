@@ -23,6 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Logger;
 
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -39,7 +40,7 @@ import com.google.gson.GsonBuilder;
 
 
 @SuppressWarnings("serial")
-@WebServlet(name = "demo", value = "/demo")
+@WebServlet(name = "demo", value = "/demo", loadOnStartup = 1)
 public class DemoServlet extends HttpServlet {
 	private final static Logger log = Logger.getLogger(DemoServlet.class.getName());
 	private static String[] links = new String[] {
@@ -47,9 +48,31 @@ public class DemoServlet extends HttpServlet {
 	};
 
 	@Override
+	public void init() throws ServletException {
+		try {
+			startup();
+		} catch (Exception e) {
+			throw new ServletException(e.getMessage(), e);
+		}
+	}
+	
+	
+	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		PrintWriter out = resp.getWriter();
 
+		try {
+			
+			startup();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		out.println("Done");
+	}
+	
+	public void startup() throws Exception{
 		for (String link : links) {
 			Document doc = Jsoup.connect(link).get();
 			Elements items = doc.select("item");
@@ -83,6 +106,5 @@ public class DemoServlet extends HttpServlet {
 			}
 		}
 
-		out.println("Done");
 	}
 }

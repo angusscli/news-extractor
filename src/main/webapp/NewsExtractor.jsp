@@ -27,5 +27,8 @@
  <input type="hidden" name="action" value="update"/>
  <input type="submit" name="dummyAction" value="Stream #AphlaStock" onclick="{document.frm.submit();}" />
 </form>
+<form name="frm" method="GET" action="/demo">
+ <input type="submit" name="dummyAction" value="demo" onclick="{document.frm.submit();}" />
+</form>
 </body>
 </html>
