@@ -17,26 +17,19 @@
 package com.cloud.sample;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.logging.Logger;
 
+import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
 import com.cloud.sample.bean.News;
-import com.google.api.client.util.Data;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -51,33 +44,38 @@ import twitter4j.conf.ConfigurationBuilder;
 
 
 @SuppressWarnings("serial")
-@WebServlet(name = "twitterStream", value = "/twitterStream")
+@WebServlet(name = "twitterStream", value = "/twitterStream", loadOnStartup = 1)
 public class TwitterServlet extends HttpServlet {
 	private final static Logger log = Logger.getLogger(TwitterServlet.class.getName());
 
 
 	FilterQuery filtered = new FilterQuery();
 
-//	String keywords[] = { "#AlphaStock","#FC4","#FC5","#trading"};
-	String keywords[] = { "#AlphaStock","#FC4","#FC5"};
+	String keywords[] = { "#AlphaStock","#FC4","#FC5","#Trading"};
+//	String keywords[] = { "#AlphaStock","#FC4","#FC5"};
 	
 	ConfigurationBuilder cb = null;
 	TwitterStreamFactory tf = null;
 	TwitterStream twitterStream = null;
 	
 	@Override
-	public void init() {
-		
-		  cb = new ConfigurationBuilder();
-	      
-		  cb.setDebugEnabled(true);
+	public void init() throws ServletException {
 
-	       tf = new TwitterStreamFactory(cb.build());
-	       
-	       log.info("Servlet Started");
-	        	
+		cb = new ConfigurationBuilder();
+
+		cb.setDebugEnabled(true);
+
+		tf = new TwitterStreamFactory(cb.build());
+
+		try {
+			startup();
+		} catch (Exception e) {
+			throw new ServletException(e.getMessage(), e);
+		}
+
+		log.info("Servlet Started");
+
 	}
-	
 	
 	
 	@Override
@@ -181,10 +179,9 @@ public class TwitterServlet extends HttpServlet {
 			
 			news.setId(Long.toString(status.getId()));
 			news.setType("twitter");
-			
-	        SimpleDateFormat parser = new SimpleDateFormat("EEE, d MMM yyyy HH:mm zzz");
+
 	        Date date;
-	
+
 	        //date = parser.parse(status.getCreatedAt());
 			date = status.getCreatedAt();
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
