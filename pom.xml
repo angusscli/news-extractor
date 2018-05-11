@@ -174,16 +174,19 @@
               <groupId>org.apache.tomcat</groupId>
               <artifactId>tomcat</artifactId>
               <version>8.5.2</version>
-            </artifactInstaller>
+	      </artifactInstaller>
+	      <timeout>240000</timeout>
           </container>
           <configuration>
             <type>standalone</type>
             <home>
               ${project.build.directory}/apache-tomcat-8.5.2
             </home>
-            <properties>
+	    <properties>
+<!--          <cargo.process.spawn>true</cargo.process.spawn> -->
+              <cargo.jvmargs>-Djava.security.egd=file:/dev/urandom</cargo.jvmargs>
               <cargo.servlet.port>8080</cargo.servlet.port>
-              <cargo.logging>high</cargo.logging>
+              <cargo.logging>medium</cargo.logging>
             </properties>
           </configuration>
           <deployables>
