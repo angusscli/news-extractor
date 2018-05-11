@@ -40,7 +40,7 @@ import com.google.gson.GsonBuilder;
 
 
 @SuppressWarnings("serial")
-@WebServlet(name = "test", value = "/")
+@WebServlet(name = "test", value = "/test")
 public class TestServlet extends HttpServlet {
 	private final static Logger log = Logger.getLogger(TestServlet.class.getName());
 	@Override
