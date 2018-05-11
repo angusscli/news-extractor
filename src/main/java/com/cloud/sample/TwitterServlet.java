@@ -83,7 +83,7 @@ public class TwitterServlet extends HttpServlet {
 		cb.setDebugEnabled(true);
 
 		tf = new TwitterStreamFactory(cb.build());
-		tf = new TwitterStreamFactory();
+		
 		try {
 			startup();
 		} catch (Exception e) {
