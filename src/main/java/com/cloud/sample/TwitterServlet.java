@@ -74,8 +74,6 @@ public class TwitterServlet extends HttpServlet {
 
 	       tf = new TwitterStreamFactory(cb.build());
 	       
-	       System.out.println("MICHAEL-- HIHIHIHIH");
-	       log.info("MICHAEL2-- ");
 	       log.info("Servlet Started");
 	        	
 	}
