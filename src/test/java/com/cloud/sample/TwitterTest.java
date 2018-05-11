@@ -21,20 +21,20 @@ public class TwitterTest {
 
 		//FilterQuery filtered = new FilterQuery()
 		
-		 ConfigurationBuilder cb = new ConfigurationBuilder();
-		 cb.setDebugEnabled(true)
-         .setOAuthConsumerKey("")
-         .setOAuthConsumerSecret("")
-         .setOAuthAccessToken("")
-         .setOAuthAccessTokenSecret("");
+//		 ConfigurationBuilder cb = new ConfigurationBuilder();
+//		 cb.setDebugEnabled(true)
+//         .setOAuthConsumerKey("")
+//         .setOAuthConsumerSecret("")
+//         .setOAuthAccessToken("")
+//         .setOAuthAccessTokenSecret("");
+		 TwitterStreamFactory tf = new TwitterStreamFactory();
+	        //TwitterStreamFactory tf = new TwitterStreamFactory(cb.build());
 	        
-	        TwitterStreamFactory tf = new TwitterStreamFactory(cb.build());
-	        ;
 	        
 	        FilterQuery filtered = new FilterQuery();
 
 			String keywords[] = {
-			"#AlphaStock","#FC4","#FC5"
+			"#AlphaStock","#FC4","#FC5","#Trading"
 		  };
 		filtered.track(keywords);
 		filtered.language("en");
