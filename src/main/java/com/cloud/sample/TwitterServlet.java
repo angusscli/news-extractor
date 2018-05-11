@@ -58,14 +58,31 @@ public class TwitterServlet extends HttpServlet {
 	TwitterStreamFactory tf = null;
 	TwitterStream twitterStream = null;
 	
+	String oauthConsumerKey = null;
+	String oauthConsumerSecret = null;
+	String oauthAccessToken = null;
+	String oauthAccessTokenSecret = null;
+	
 	@Override
 	public void init() throws ServletException {
 
-//		cb = new ConfigurationBuilder();
-//
-//		cb.setDebugEnabled(true);
-//
-//		tf = new TwitterStreamFactory(cb.build());
+		 cb = new ConfigurationBuilder();
+
+		 oauthConsumerKey = System.getProperty("oauthConsumerKey");
+		 oauthConsumerSecret = System.getProperty("oauthConsumerSecret");
+		 oauthAccessToken = System.getProperty("oauthAccessToken");
+		 oauthAccessTokenSecret = System.getProperty("oauthAccessTokenSecret");
+		 
+		 ConfigurationBuilder cb = new ConfigurationBuilder();
+		 cb.setDebugEnabled(true)
+        .setOAuthConsumerKey(oauthConsumerKey)
+        .setOAuthConsumerSecret(oauthConsumerSecret)
+        .setOAuthAccessToken(oauthAccessToken)
+        .setOAuthAccessTokenSecret(oauthAccessTokenSecret);
+		
+		cb.setDebugEnabled(true);
+
+		tf = new TwitterStreamFactory(cb.build());
 		tf = new TwitterStreamFactory();
 		try {
 			startup();

@@ -14,6 +14,11 @@ public class TwitterTest {
 	private final static String PROJECT_ID = "techfest-hackathon-1";
 	private final static String TOPIC_ID = "news-topic";
 	
+	String oauthConsumerKey = null;
+	String oauthConsumerSecret = null;
+	String oauthAccessToken = null;
+	String oauthAccessTokenSecret = null;
+	
 	//@Test
 	@Test
 	public void extractTest() throws Exception {
@@ -21,12 +26,18 @@ public class TwitterTest {
 
 		//FilterQuery filtered = new FilterQuery()
 		
-//		 ConfigurationBuilder cb = new ConfigurationBuilder();
-//		 cb.setDebugEnabled(true)
-//         .setOAuthConsumerKey("")
-//         .setOAuthConsumerSecret("")
-//         .setOAuthAccessToken("")
-//         .setOAuthAccessTokenSecret("");
+		 oauthConsumerKey = System.getProperty("oauthConsumerKey");
+		 oauthConsumerSecret = System.getProperty("oauthConsumerSecret");
+		 oauthAccessToken = System.getProperty("oauthAccessToken");
+		 oauthAccessTokenSecret = System.getProperty("oauthAccessTokenSecret");
+		 
+		 ConfigurationBuilder cb = new ConfigurationBuilder();
+		 cb.setDebugEnabled(true)
+        .setOAuthConsumerKey(oauthConsumerKey)
+        .setOAuthConsumerSecret(oauthConsumerSecret)
+        .setOAuthAccessToken(oauthAccessToken)
+        .setOAuthAccessTokenSecret(oauthAccessTokenSecret);
+		 
 		 TwitterStreamFactory tf = new TwitterStreamFactory();
 	        //TwitterStreamFactory tf = new TwitterStreamFactory(cb.build());
 	        
