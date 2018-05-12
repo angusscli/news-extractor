@@ -54,7 +54,7 @@ public class TwitterServlet extends HttpServlet {
 	String keywords[] = { "#AlphaStock","#FC4","#FC5","#Trading"};
 //	String keywords[] = { "#AlphaStock","#FC4","#FC5"};
 	
-	ConfigurationBuilder cb = null;
+//	ConfigurationBuilder cb = null;
 	TwitterStreamFactory tf = null;
 	TwitterStream twitterStream = null;
 	
@@ -66,23 +66,11 @@ public class TwitterServlet extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 
-		 cb = new ConfigurationBuilder();
+		//cb = new ConfigurationBuilder();
+		//cb.setDebugEnabled(true);
 
-		 oauthConsumerKey = System.getProperty("oauthConsumerKey");
-		 oauthConsumerSecret = System.getProperty("oauthConsumerSecret");
-		 oauthAccessToken = System.getProperty("oauthAccessToken");
-		 oauthAccessTokenSecret = System.getProperty("oauthAccessTokenSecret");
-		 
-		 ConfigurationBuilder cb = new ConfigurationBuilder();
-		 cb.setDebugEnabled(true)
-        .setOAuthConsumerKey(oauthConsumerKey)
-        .setOAuthConsumerSecret(oauthConsumerSecret)
-        .setOAuthAccessToken(oauthAccessToken)
-        .setOAuthAccessTokenSecret(oauthAccessTokenSecret);
-		
-		cb.setDebugEnabled(true);
-
-		tf = new TwitterStreamFactory(cb.build());
+		//tf = new TwitterStreamFactory(cb.build());
+		tf = new TwitterStreamFactory();
 		
 		try {
 			startup();

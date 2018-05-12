@@ -176,6 +176,7 @@
               <version>8.5.2</version>
 	      </artifactInstaller>
 	      <timeout>240000</timeout>
+	      <systemPropertiesFile>/opt/source/news-extractor/twitter.properties</systemPropertiesFile>
           </container>
           <configuration>
             <type>standalone</type>

@@ -22,27 +22,16 @@ public class TwitterTest {
 	//@Test
 	@Test
 	public void extractTest() throws Exception {
-		//System.out.println("Hello");
+
 
 		//FilterQuery filtered = new FilterQuery()
-		
-		 oauthConsumerKey = System.getProperty("oauthConsumerKey");
-		 oauthConsumerSecret = System.getProperty("oauthConsumerSecret");
-		 oauthAccessToken = System.getProperty("oauthAccessToken");
-		 oauthAccessTokenSecret = System.getProperty("oauthAccessTokenSecret");
 		 
-		 ConfigurationBuilder cb = new ConfigurationBuilder();
-		 cb.setDebugEnabled(true)
-        .setOAuthConsumerKey(oauthConsumerKey)
-        .setOAuthConsumerSecret(oauthConsumerSecret)
-        .setOAuthAccessToken(oauthAccessToken)
-        .setOAuthAccessTokenSecret(oauthAccessTokenSecret);
-		 
+		 //Set up the system properties for twitter 4j or specify the system property file in cargo:run
 		 TwitterStreamFactory tf = new TwitterStreamFactory();
-	        //TwitterStreamFactory tf = new TwitterStreamFactory(cb.build());
+        //TwitterStreamFactory tf = new TwitterStreamFactory(cb.build());
 	        
 	        
-	        FilterQuery filtered = new FilterQuery();
+	     FilterQuery filtered = new FilterQuery();
 
 			String keywords[] = {
 			"#AlphaStock","#FC4","#FC5","#Trading"
