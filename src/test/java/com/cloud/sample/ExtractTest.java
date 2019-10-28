@@ -30,6 +30,7 @@ public class ExtractTest {
 	private final static String PROJECT_ID = "traded-risk-project-1";
 	private final static String TOPIC_ID = "news-topic";
 	
+
 	/*
 	@Test
 	public void writeTest() throws IOException {
