@@ -176,8 +176,8 @@
               <version>8.5.2</version>
 	      </artifactInstaller>
 	      <timeout>240000</timeout>
-	      <systemPropertiesFile>/opt/news-extractor/twitter4j.properties</systemPropertiesFile>
-	      <!-- <systemPropertiesFile>C://tmp//twitter4j.properties</systemPropertiesFile> -->
+<!-- 	      <systemPropertiesFile>/opt/news-extractor/twitter4j.properties</systemPropertiesFile> -->
+	      <systemPropertiesFile>C://tmp//twitter4j.properties</systemPropertiesFile>
           </container>
           <configuration>
             <type>standalone</type>

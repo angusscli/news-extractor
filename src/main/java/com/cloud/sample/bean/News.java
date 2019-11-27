@@ -8,6 +8,7 @@ public class News {
 	private String date;
 	private String id;
 	private String type;
+	private String company;
 
 	public String getTitle() {
 		return title;
@@ -50,4 +51,11 @@ public class News {
 		       append("type",type).
 		       toString();
 		   }
+	public String getCompany() {
+		return company;
+	}
+	public void setCompany(String company) {
+		this.company = company;
+	}
+	
 }

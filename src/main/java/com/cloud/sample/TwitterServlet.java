@@ -44,14 +44,14 @@ import twitter4j.conf.ConfigurationBuilder;
 
 
 @SuppressWarnings("serial")
-@WebServlet(name = "twitterStream", value = "/twitterStream", loadOnStartup = 1)
+@WebServlet(name = "twitterStream", value = "/twitterStream", loadOnStartup = 0)
 public class TwitterServlet extends HttpServlet {
 	private final static Logger log = Logger.getLogger(TwitterServlet.class.getName());
 
 
 	FilterQuery filtered = new FilterQuery();
 
-	String keywords[] = { "#HSBC","#TELSA"};
+	String keywords[] = { "HSBC","TELSA"};
 //	String keywords[] = { "#AlphaStock","#FC4","#FC5"};
 	
 //	ConfigurationBuilder cb = null;
@@ -185,6 +185,23 @@ public class TwitterServlet extends HttpServlet {
 			
 			news.setId(Long.toString(status.getId()));
 			news.setType("twitter");
+			
+			if (status.getText()!=null)
+			{
+				if (status.getText().contains("HSBC"))
+				{
+					news.setCompany("HSBC");
+				
+					
+				}
+				if (status.getText().contains("TESLA"))
+				{
+					news.setCompany("TESLA");
+			
+				}
+				
+			
+			}
 
 	        Date date;
 

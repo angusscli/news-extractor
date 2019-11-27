@@ -20,6 +20,9 @@
 	$ gcloud pubsub topics create twitter-topic
 	$ gcloud pubsub subscriptions create twitter-subscription --topic twitter-topic
 
+	$ To clear the message
+	$ gcloud pubsub subscriptions delete twitter-subscription
+		
 ## API
 
 ### News Crawler

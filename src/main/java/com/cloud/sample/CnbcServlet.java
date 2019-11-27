@@ -64,7 +64,8 @@ public class CnbcServlet extends HttpServlet {
 				news.setTitle(item.select("title").text());
 				news.setDescription(item.select("description").text());
 				news.setId(item.select("guid").text());
-				news.setType("cnbc");
+				news.setType("twiter");
+				//out.println("");
 		        SimpleDateFormat parser = new SimpleDateFormat("EEE, d MMM yyyy HH:mm zzz");
 		        Date date;
 
