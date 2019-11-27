@@ -51,7 +51,7 @@ public class TwitterServlet extends HttpServlet {
 
 	FilterQuery filtered = new FilterQuery();
 
-	String keywords[] = { "HSBC","TELSA"};
+	String keywords[] = { "HSBC","TESLA"};
 //	String keywords[] = { "#AlphaStock","#FC4","#FC5"};
 	
 //	ConfigurationBuilder cb = null;
@@ -188,19 +188,15 @@ public class TwitterServlet extends HttpServlet {
 			
 			if (status.getText()!=null)
 			{
-				if (status.getText().contains("HSBC"))
+				if (status.getText().toLowerCase().contains("hsbc"))
 				{
 					news.setCompany("HSBC");
-				
-					
+
 				}
-				if (status.getText().contains("TESLA"))
+				if (status.getText().toLowerCase().contains("tesla"))
 				{
 					news.setCompany("TESLA");
-			
 				}
-				
-			
 			}
 
 	        Date date;
