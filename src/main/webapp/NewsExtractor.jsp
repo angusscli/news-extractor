@@ -18,14 +18,14 @@
  <input type="submit" name="dummyAction" value="Show Twitter Steam Filters" onclick="{document.frm.submit();}" />
 </form>
 <form name="frm" method="GET" action="/twitterStream">
- <input type="hidden" name="keywords" value="#Trading" id="keywords">
+ <input type="hidden" name="keywords" value="#TESLA" id="keywords">
  <input type="hidden" name="action" value="update"/>
- <input type="submit" name="dummyAction" value="Stream #Trading" onclick="{document.frm.submit();}" />
+ <input type="submit" name="dummyAction" value="Stream #TESLA" onclick="{document.frm.submit();}" />
 </form>
 <form name="frm" method="GET" action="/twitterStream">
- <input type="hidden" name="keywords" value="#AlphaStock,#FC4,#FC5" id="keywords">
+ <input type="hidden" name="keywords" value="#HSBC" id="keywords">
  <input type="hidden" name="action" value="update"/>
- <input type="submit" name="dummyAction" value="Stream #AphlaStock" onclick="{document.frm.submit();}" />
+ <input type="submit" name="dummyAction" value="Stream #HSBC" onclick="{document.frm.submit();}" />
 </form>
 <form name="frm" method="GET" action="/demo">
  <input type="submit" name="dummyAction" value="demo" onclick="{document.frm.submit();}" />
