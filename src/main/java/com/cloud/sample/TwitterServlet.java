@@ -51,7 +51,7 @@ public class TwitterServlet extends HttpServlet {
 
 	FilterQuery filtered = new FilterQuery();
 
-	String keywords[] = { "#AlphaStock","#FC4","#FC5","#Trading"};
+	String keywords[] = { "#HSBC","#TELSA"};
 //	String keywords[] = { "#AlphaStock","#FC4","#FC5"};
 	
 //	ConfigurationBuilder cb = null;
@@ -68,7 +68,7 @@ public class TwitterServlet extends HttpServlet {
 
 		//cb = new ConfigurationBuilder();
 		//cb.setDebugEnabled(true);
-
+		log.info("-------------------------------------------------------------------------------------------------");
 		//tf = new TwitterStreamFactory(cb.build());
 		tf = new TwitterStreamFactory();
 		
@@ -148,6 +148,7 @@ public class TwitterServlet extends HttpServlet {
 		{			
 			filtered.track(keywords);
 			filtered.language("en");
+			
 			
 			twitterStream = tf.getInstance();
 			

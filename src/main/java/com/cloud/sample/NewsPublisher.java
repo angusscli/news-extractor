@@ -12,8 +12,8 @@ import com.google.pubsub.v1.ProjectTopicName;
 import com.google.pubsub.v1.PubsubMessage;
 
 public class NewsPublisher {
-	private final static String PROJECT_ID = "techfest-hackathon-1";
-	private final static String TOPIC_ID = "news-topic";
+	private final static String PROJECT_ID = "eep-hack-19-1";
+	private final static String TOPIC_ID = "twitter-topic";
 
 	private final static Logger log = Logger.getLogger(NewsPublisher.class.getName());
 
@@ -41,9 +41,11 @@ public class NewsPublisher {
 						ApiException apiException = ((ApiException) throwable);
 						// details on the API exception
 						log.severe(apiException.getStatusCode().getCode().name());
+						log.info(apiException.getStackTrace().toString());
 						//System.out.println(apiException.isRetryable());
 					}
 					log.severe("Error publishing message : " + message);
+					
 				}
 
 				@Override
@@ -52,7 +54,13 @@ public class NewsPublisher {
 					log.info(messageId);
 				}
 			});
-		} finally {
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			
+    	}finally
+		{
+			
 			if (publisher != null) {
 				// When finished with the publisher, shutdown to free up resources.
 				publisher.shutdown();
