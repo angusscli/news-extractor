@@ -52,7 +52,6 @@ public class TwitterServlet extends HttpServlet {
 	FilterQuery filtered = new FilterQuery();
 
 	String keywords[] = { "HSBC","TESLA"};
-//	String keywords[] = { "#AlphaStock","#FC4","#FC5"};
 	
 //	ConfigurationBuilder cb = null;
 	TwitterStreamFactory tf = null;
@@ -180,8 +179,8 @@ public class TwitterServlet extends HttpServlet {
 			log.info("Status" + status.getUser().getName()+ ":" + status.getText());
 			log.info("Description" + status.getUser().getName()+":"+ status.getText());
 			
-			System.out.println("Status" + status.getUser().getName()+ ":" + status.getText());
-			System.out.println("Description" + status.getUser().getName()+":"+ status.getText());
+			System.out.println("Status: " + status.getUser().getName()+ ":" + status.getText());
+			System.out.println("Description: " + status.getUser().getName()+":"+ status.getText());
 			
 			news.setId(Long.toString(status.getId()));
 			news.setType("twitter");
